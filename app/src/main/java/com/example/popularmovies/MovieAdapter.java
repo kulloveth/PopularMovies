@@ -40,12 +40,12 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
     private static DiffUtil.ItemCallback<Movie> sCallback = new DiffUtil.ItemCallback<Movie>() {
         @Override
         public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.getMovieId().equals(newItem.getMovieId());
+            return oldItem.getMovieId()==(newItem.getMovieId());
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.getMovieId().equals(newItem.getMovieId());
+            return oldItem.equals(newItem);
         }
     };
 }
