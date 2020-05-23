@@ -2,12 +2,15 @@ package com.example.popularmovies.ui;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.popularmovies.ApiUtils;
 import com.example.popularmovies.databinding.MovieItemBinding;
 import com.example.popularmovies.model.Movie;
 
@@ -27,13 +30,20 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+        Movie movie = getItem(position);
+        String imageUrl = ApiUtils.BASE_IMAGE_PATH+movie.getmThumbnail();
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl).into(holder.posterImage);
+
 
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
+        private ImageView posterImage;
 
         public MovieViewHolder(MovieItemBinding binding) {
             super(binding.getRoot());
+            posterImage = binding.moviePoster;
         }
     }
 

@@ -25,13 +25,13 @@ public class Movie implements Serializable {
 
     @SerializedName("vote_average")
     @Expose
-    private int mUserRating;
+    private double mUserRating;
 
     @SerializedName("overview")
     @Expose
     private String mSynopsis;
 
-    public Movie(int movieId, String mReleaseDate, String mTitle, String mThumbnail, int mUserRating, String mSynopsis) {
+    public Movie(int movieId, String mReleaseDate, String mTitle, String mThumbnail, double mUserRating, String mSynopsis) {
         this.movieId = movieId;
         this.mReleaseDate = mReleaseDate;
         this.mTitle = mTitle;
@@ -56,7 +56,7 @@ public class Movie implements Serializable {
         return mThumbnail;
     }
 
-    public int getmUserRating() {
+    public double getmUserRating() {
         return mUserRating;
     }
 

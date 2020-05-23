@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dimens_200dp"
-    android:layout_height="@dimen/dimens_300dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimens_280dp"
+    app:cardCornerRadius="5dp"
+    android:layout_marginTop="@dimen/dimens_16dp"
+    app:cardUseCompatPadding="true">
 
     <ImageView
         android:id="@+id/movie_poster"
