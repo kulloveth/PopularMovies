@@ -20,12 +20,13 @@ import retrofit2.Response;
 public class MainActivityVieModel extends ViewModel {
     private static final String TAG = MainActivityVieModel.class.getSimpleName();
 
-    private MutableLiveData<List<Movie>> movieLiveData;
+    private MutableLiveData<List<Movie>> popularMovieLiveData;
+    private MutableLiveData<List<Movie>> topRatedMovieLiveData;
     private MovieApiInterface movieApiInterface;
 
     public MainActivityVieModel() {
         movieApiInterface = ApiUtils.getMovieApiInterface();
-        movieLiveData = new MutableLiveData<>();
+        popularMovieLiveData = new MutableLiveData<>();
     }
 
     LiveData<List<Movie>> getPopularMovie() {
@@ -33,17 +34,34 @@ public class MainActivityVieModel extends ViewModel {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    movieLiveData.setValue(response.body().getMovies());
+                    popularMovieLiveData.setValue(response.body().getMovies());
                 } else {
                     Log.e(TAG, "onResponse: Error fetching data" + response.errorBody());
                 }
             }
-
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 Log.e(TAG, "error" + t.getMessage());
             }
         });
-        return movieLiveData;
+        return popularMovieLiveData;
+    }
+
+    LiveData<List<Movie>> getTopRatedMovie() {
+        movieApiInterface.getTopRatedMovies().enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful()) {
+                    popularMovieLiveData.setValue(response.body().getMovies());
+                } else {
+                    Log.e(TAG, "onResponse: Error fetching data" + response.errorBody());
+                }
+            }
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                Log.e(TAG, "error" + t.getMessage());
+            }
+        });
+        return topRatedMovieLiveData;
     }
 }

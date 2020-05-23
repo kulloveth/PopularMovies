@@ -3,4 +3,6 @@
     <string name="movie_poster">Movie-Poster</string>
     <string name="user_rating">User Rating </string>
     <string name="release_date">Released Date</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular_movies">Popular Movies</string>
 </resources>
