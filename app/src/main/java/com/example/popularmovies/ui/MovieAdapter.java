@@ -1,6 +1,7 @@
 package com.example.popularmovies.ui;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -16,9 +17,14 @@ import com.example.popularmovies.model.Movie;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
     private MovieItemBinding binding;
+    private ItemClickedListener mItemClickedListener;
 
-    protected MovieAdapter() {
+    MovieAdapter() {
         super(sCallback);
+    }
+
+    public void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
+        this.mItemClickedListener = mItemClickedListener;
     }
 
     @NonNull
@@ -31,9 +37,15 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = getItem(position);
-        String imageUrl = ApiUtils.BASE_IMAGE_PATH+movie.getmThumbnail();
+        String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail();
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl).into(holder.posterImage);
+        holder.posterImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemClickedListener.onItemClicked(movie, position);
+            }
+        });
 
 
     }
@@ -45,12 +57,13 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
             super(binding.getRoot());
             posterImage = binding.moviePoster;
         }
+
     }
 
     private static DiffUtil.ItemCallback<Movie> sCallback = new DiffUtil.ItemCallback<Movie>() {
         @Override
         public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.getMovieId()==(newItem.getMovieId());
+            return oldItem.getMovieId() == (newItem.getMovieId());
         }
 
         @Override
@@ -58,4 +71,8 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
             return oldItem.equals(newItem);
         }
     };
+
+    interface ItemClickedListener {
+        void onItemClicked(Movie movie, int position);
+    }
 }

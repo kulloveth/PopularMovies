@@ -1,6 +1,7 @@
 package com.example.popularmovies.ui;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -16,6 +17,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    Movie movie = new Movie();
+    MovieAdapter.ItemClickedListener mItemClickedlistener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityVieModel mainActivityVieModel = new ViewModelProvider(this).get(MainActivityVieModel.class);
 
-        mainActivityVieModel.getPopularMovie().observe(this, adapter::submitList);
+        mainActivityVieModel.getPopularMovie().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                adapter.submitList(movies);
+            }
+        });
+        adapter.setmItemClickedListener((movie, position) -> Toast.makeText(MainActivity.this, "" + movie.getmTitle(), Toast.LENGTH_SHORT).show());
+
+
 
 
     }
+
 }
