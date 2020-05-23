@@ -3,4 +3,6 @@
     <dimen name="dimens_280dp">280dp</dimen>
     <dimen name="dimens_300dp">300dp</dimen>
     <dimen name="dimens_16dp">16dp</dimen>
+    <dimen name="dimens_24sp">24sp</dimen>
+    <dimen name="dimens_1dp">1dp</dimen>
 </resources>

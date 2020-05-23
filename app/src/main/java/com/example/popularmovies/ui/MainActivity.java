@@ -1,5 +1,6 @@
 package com.example.popularmovies.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,9 +17,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MOVIE_KEY = "movie";
     private ActivityMainBinding binding;
-    Movie movie = new Movie();
-    MovieAdapter.ItemClickedListener mItemClickedlistener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 adapter.submitList(movies);
             }
         });
-        adapter.setmItemClickedListener((movie, position) -> Toast.makeText(MainActivity.this, "" + movie.getmTitle(), Toast.LENGTH_SHORT).show());
-
-
-
+        adapter.setmItemClickedListener((movie, position) -> {
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra(MOVIE_KEY, movie);
+            startActivity(intent);
+            Toast.makeText(MainActivity.this, "" + movie.getmTitle(), Toast.LENGTH_SHORT).show();
+        });
 
     }
 
