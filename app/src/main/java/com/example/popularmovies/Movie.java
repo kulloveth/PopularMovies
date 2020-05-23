@@ -3,14 +3,23 @@ package com.example.popularmovies;
 import java.io.Serializable;
 
 public class Movie implements Serializable {
-    private String movieId;
+    private int movieId;
     private String mReleaseDate;
     private String mTitle;
     private String mThumbnail;
-    private String mUserRating;
+    private int mUserRating;
     private String mSynopsis;
 
-    public String getMovieId() {
+    public Movie(int movieId, String mReleaseDate, String mTitle, String mThumbnail, int mUserRating, String mSynopsis) {
+        this.movieId = movieId;
+        this.mReleaseDate = mReleaseDate;
+        this.mTitle = mTitle;
+        this.mThumbnail = mThumbnail;
+        this.mUserRating = mUserRating;
+        this.mSynopsis = mSynopsis;
+    }
+
+    public int getMovieId() {
         return movieId;
     }
 
@@ -26,21 +35,12 @@ public class Movie implements Serializable {
         return mThumbnail;
     }
 
-    public String getmUserRating() {
+    public int getmUserRating() {
         return mUserRating;
     }
 
     public String getmSynopsis() {
         return mSynopsis;
-    }
-
-    public Movie(String movieId, String mReleaseDate, String mTitle, String mThumbnail, String mUserRating, String mSynopsis) {
-        this.movieId = movieId;
-        this.mReleaseDate = mReleaseDate;
-        this.mTitle = mTitle;
-        this.mThumbnail = mThumbnail;
-        this.mUserRating = mUserRating;
-        this.mSynopsis = mSynopsis;
     }
 
     public Movie() {
