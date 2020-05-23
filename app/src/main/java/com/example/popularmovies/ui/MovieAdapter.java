@@ -1,7 +1,6 @@
-package com.example.popularmovies;
+package com.example.popularmovies.ui;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.popularmovies.databinding.MovieItemBinding;
+import com.example.popularmovies.model.Movie;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
     private MovieItemBinding binding;
