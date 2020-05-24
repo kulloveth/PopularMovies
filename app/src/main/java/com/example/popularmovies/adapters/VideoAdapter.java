@@ -18,7 +18,7 @@ import com.example.popularmovies.model.MovieVideo;
 public class VideoAdapter extends ListAdapter<MovieVideo, VideoAdapter.MovieVideoViewHolder> {
     private ItemClickedListener mItemClickedListener;
 
-    VideoAdapter() {
+    public VideoAdapter() {
         super(sCallback);
     }
 

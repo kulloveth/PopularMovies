@@ -6,4 +6,5 @@
     <dimen name="dimens_24sp">24sp</dimen>
     <dimen name="dimens_1dp">1dp</dimen>
     <dimen name="dimens_42dp">42dp</dimen>
+    <dimen name="dimens_200dp">200dp</dimen>
 </resources>

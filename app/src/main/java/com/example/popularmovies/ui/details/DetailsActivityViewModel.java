@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.popularmovies.ApiUtils;
 import com.example.popularmovies.ProgressListener;
+import com.example.popularmovies.model.Movie;
 import com.example.popularmovies.model.MovieVideo;
 import com.example.popularmovies.model.MovieVideosResponse;
 import com.example.popularmovies.retrofit.MovieApiInterface;
@@ -24,7 +25,6 @@ public class DetailsActivityViewModel extends ViewModel {
     private MutableLiveData<List<MovieVideo>> trailerVideosLivedata;
     private MovieApiInterface movieApiInterface;
     private ProgressListener listener;
-    MovieVideo movieVideo;
 
     void setListener(ProgressListener listener) {
         this.listener = listener;
@@ -33,13 +33,12 @@ public class DetailsActivityViewModel extends ViewModel {
     public DetailsActivityViewModel() {
         movieApiInterface = ApiUtils.getMovieApiInterface();
         trailerVideosLivedata = new MutableLiveData<>();
-        movieVideo = new MovieVideo();
+
     }
 
-    LiveData<List<MovieVideo>> getMovieTrailer() {
-        String videosUrl = ApiUtils.BASE_URL + movieVideo.getId()
-                + ApiUtils.MOVIE_VIDEOS_PATH + ApiUtils.API_KEY_PARAM + ApiUtils.API_KEY;
-        movieApiInterface.getMovieVideo(videosUrl).enqueue(new Callback<MovieVideosResponse>() {
+    LiveData<List<MovieVideo>> getMovieTrailer(String url) {
+
+        movieApiInterface.getMovieVideo(url).enqueue(new Callback<MovieVideosResponse>() {
             @Override
             public void onResponse(Call<MovieVideosResponse> call, Response<MovieVideosResponse> response) {
                 if (response.isSuccessful()) {
