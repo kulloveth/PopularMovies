@@ -15,9 +15,9 @@ import com.example.popularmovies.databinding.MovieItemBinding;
 import com.example.popularmovies.model.Movie;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
-    private ItemClickedListener mItemClickedListener;
+    public ItemClickedListener mItemClickedListener;
 
-    MovieAdapter() {
+   public MovieAdapter() {
         super(sCallback);
     }
 
@@ -65,7 +65,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
         }
     };
 
-    interface ItemClickedListener {
+    public interface ItemClickedListener {
         void onItemClicked(Movie movie, int position);
     }
 }

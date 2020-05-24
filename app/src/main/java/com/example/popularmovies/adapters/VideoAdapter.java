@@ -3,12 +3,15 @@ package com.example.popularmovies.adapters;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.popularmovies.ApiUtils;
 import com.example.popularmovies.databinding.TrailerItemBinding;
 import com.example.popularmovies.model.MovieVideo;
 
@@ -32,21 +35,25 @@ public class VideoAdapter extends ListAdapter<MovieVideo, VideoAdapter.MovieVide
 
     @Override
     public void onBindViewHolder(@NonNull MovieVideoViewHolder holder, int position) {
-        MovieVideo movie = getItem(position);
-//        String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail();
-//        Glide.with(holder.itemView.getContext())
-//                .load(imageUrl).into(holder.posterImage);
-//        holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
+        MovieVideo video = getItem(position);
+        String youtubeKey = video.getKey();
+        String imageUrl = ApiUtils.YOUTUBE_BASE_IMAGE_URL + youtubeKey + ApiUtils.YOUTUBE_JPG_ENDING_URL;
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl).into(holder.posterImage);
+        holder.trailerName.setText(video.getName());
+        // holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
 
 
     }
 
     class MovieVideoViewHolder extends RecyclerView.ViewHolder {
         private ImageView posterImage;
+        private TextView trailerName;
 
         MovieVideoViewHolder(TrailerItemBinding binding) {
             super(binding.getRoot());
             posterImage = binding.trailerPoster;
+            trailerName = binding.trailerNameTv;
         }
 
     }

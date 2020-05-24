@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui;
+package com.example.popularmovies.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.MovieAdapter;
 import com.example.popularmovies.databinding.ActivityMainBinding;
 import com.example.popularmovies.model.Movie;
+import com.example.popularmovies.ui.details.DetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

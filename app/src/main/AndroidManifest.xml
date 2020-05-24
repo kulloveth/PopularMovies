@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.DetailActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:name=".ui.details.DetailActivity"
+            android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value=".ui.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.main.MainActivity"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|screenSize|orientation">
             <intent-filter>

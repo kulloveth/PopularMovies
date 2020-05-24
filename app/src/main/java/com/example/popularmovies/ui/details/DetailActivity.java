@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui;
+package com.example.popularmovies.ui.details;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.databinding.ActivityDetailBinding;
 import com.example.popularmovies.model.Movie;
 
-import static com.example.popularmovies.ui.MainActivity.MOVIE_KEY;
+import static com.example.popularmovies.ui.main.MainActivity.MOVIE_KEY;
 
 public class DetailActivity extends AppCompatActivity {
 

@@ -9,6 +9,7 @@ import com.example.popularmovies.model.MovieVideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 public interface MovieApiInterface {
 
@@ -21,10 +22,10 @@ public interface MovieApiInterface {
     Call<MovieResponse> getTopRatedMovies();
 
     @GET
-    Call<MovieVideosResponse> getMovieVideo();
+    Call<MovieVideosResponse> getMovieVideo(@Url String videoUrl);
 
     @GET
-    Call<MovieReviewsResponse> getMovieReview();
+    Call<MovieReviewsResponse> getMovieReview(@Url String reviewUrl);
 
 
 }
