@@ -22,6 +22,18 @@ public class ApiUtils {
 
     public static final String BASE_IMAGE_PATH = "http://image.tmdb.org/t/p/w185/";
 
+    private final String MOVIE_VIDEOS_PATH = "/videos";
+
+    private final String MOVIE_REVIEWS_PATH = "/reviews";
+
+    private final String YOUTUBE_BASE_VIDEO_URL = "https://www.youtube.com/watch?v";
+
+    private final String YOUTUBE_BASE_IMAGE_URL = "https://img.youtube.com/vi/";
+
+    private final String YOUTUBE_JPG_ENDING_URL = "/1.jpg";
+
+    private final String YOUTUBE_BASE_APP_URL = "vnd.youtube";
+
     public static MovieApiInterface getMovieApiInterface() {
         return RetrofitClient.getRetrofitClient(ApiUtils.BASE_URL).create(MovieApiInterface.class);
     }
