@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     binding.progressBar.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                 } else {
-                    binding.progressBar.setVisibility(View.INVISIBLE);
-                    Snackbar.make(getWindow().getDecorView(), getString(R.string.no_internet_message), Snackbar.LENGTH_SHORT).show();
+                   promptUserForNetwork();
                 }
             }
 
@@ -81,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void showNoInternet() {
-                binding.progressBar.setVisibility(View.INVISIBLE);
-                Snackbar.make(getWindow().getDecorView(), getString(R.string.no_internet_message), Snackbar.LENGTH_SHORT).show();
+              promptUserForNetwork();
             }
 
 
@@ -142,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
             networkInfo = connectivityManager.getActiveNetworkInfo();
         }
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
+    }
+
+    void promptUserForNetwork() {
+        binding.progressBar.setVisibility(View.INVISIBLE);
+        Snackbar.make(getWindow().getDecorView(), getString(R.string.no_internet_message), Snackbar.LENGTH_SHORT).show();
     }
 
 }
