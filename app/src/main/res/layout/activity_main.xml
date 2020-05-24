@@ -7,10 +7,21 @@
     tools:context=".ui.MainActivity">
 
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="@dimen/dimens_42dp"
         android:layout_height="@dimen/dimens_42dp"
         android:visibility="gone"
-        android:id="@+id/progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/no_intrnet_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/no_internet_message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.popularmovies.ApiUtils;
+import com.example.popularmovies.R;
 import com.example.popularmovies.databinding.ActivityDetailBinding;
 import com.example.popularmovies.model.Movie;
 
@@ -20,7 +21,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setTitle(getString(R.string.movie__detail));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //get data from intent if it exist
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Movie movie = bundle.getParcelable(MOVIE_KEY);
@@ -32,4 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

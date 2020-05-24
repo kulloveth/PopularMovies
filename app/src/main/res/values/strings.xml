@@ -5,4 +5,6 @@
     <string name="release_date">Released Date</string>
     <string name="top_rated">Top Rated</string>
     <string name="popular_movies">Popular Movies</string>
+    <string name="movie__detail">Movie Detail</string>
+    <string name="no_internet_message">No Internet Connection</string>
 </resources>
