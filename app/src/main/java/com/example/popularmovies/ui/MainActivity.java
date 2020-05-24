@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.popularmovies.ProgressListener;
 import com.example.popularmovies.R;
+import com.example.popularmovies.adapters.MovieAdapter;
 import com.example.popularmovies.databinding.ActivityMainBinding;
 import com.example.popularmovies.model.Movie;
 import com.google.android.material.snackbar.Snackbar;

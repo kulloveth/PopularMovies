@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui;
+package com.example.popularmovies.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -21,7 +21,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
         super(sCallback);
     }
 
-    void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
+    public void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
         this.mItemClickedListener = mItemClickedListener;
     }
 

@@ -6,42 +6,36 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class MovieReview implements Parcelable {
 
+    @SerializedName("author")
+    @Expose
+    private String author;
+    @SerializedName("content")
+    @Expose
+    private String content;
     @SerializedName("id")
     @Expose
-    private int id;
-    @SerializedName("page")
+    private String id;
+    @SerializedName("url")
     @Expose
-    private int page;
-    @SerializedName("results")
-    @Expose
-    private List<MovieReviewResponse> movieReviewResponseList = null;
-    @SerializedName("total_pages")
-    @Expose
-    private int totalPages;
-    @SerializedName("total_results")
-    @Expose
-    private int totalResults;
+    private String url;
 
     public MovieReview() {
     }
 
-    public MovieReview(int id, int page, List<MovieReviewResponse> movieReviewResponseList, int totalPages, int totalResults) {
+    public MovieReview(String author, String content, String id, String url) {
+        this.author = author;
+        this.content = content;
         this.id = id;
-        this.page = page;
-        this.movieReviewResponseList = movieReviewResponseList;
-        this.totalPages = totalPages;
-        this.totalResults = totalResults;
+        this.url = url;
     }
 
     protected MovieReview(Parcel in) {
-        id = in.readInt();
-        page = in.readInt();
-        totalPages = in.readInt();
-        totalResults = in.readInt();
+        author = in.readString();
+        content = in.readString();
+        id = in.readString();
+        url = in.readString();
     }
 
     public static final Creator<MovieReview> CREATOR = new Creator<MovieReview>() {
@@ -56,24 +50,20 @@ public class MovieReview implements Parcelable {
         }
     };
 
-    public int getId() {
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public int getPage() {
-        return page;
-    }
-
-    public List<MovieReviewResponse> getMovieReviewResponseList() {
-        return movieReviewResponseList;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public int getTotalResults() {
-        return totalResults;
+    public String getUrl() {
+        return url;
     }
 
     @Override
@@ -83,9 +73,9 @@ public class MovieReview implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(page);
-        dest.writeInt(totalPages);
-        dest.writeInt(totalResults);
+        dest.writeString(author);
+        dest.writeString(content);
+        dest.writeString(id);
+        dest.writeString(url);
     }
 }

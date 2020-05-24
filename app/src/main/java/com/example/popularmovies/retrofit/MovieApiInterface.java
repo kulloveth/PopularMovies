@@ -2,8 +2,10 @@ package com.example.popularmovies.retrofit;
 
 import com.example.popularmovies.ApiUtils;
 import com.example.popularmovies.model.MovieResponse;
-import com.example.popularmovies.model.MovieReviewResponse;
-import com.example.popularmovies.model.MovieVideoResponse;
+import com.example.popularmovies.model.MovieReview;
+import com.example.popularmovies.model.MovieReviewsResponse;
+import com.example.popularmovies.model.MovieVideo;
+import com.example.popularmovies.model.MovieVideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,10 +21,10 @@ public interface MovieApiInterface {
     Call<MovieResponse> getTopRatedMovies();
 
     @GET
-    Call<MovieVideoResponse> getMovieVideo();
+    Call<MovieVideosResponse> getMovieVideo();
 
     @GET
-    Call<MovieReviewResponse> getMoviewReview();
+    Call<MovieReviewsResponse> getMovieReview();
 
 
 }
