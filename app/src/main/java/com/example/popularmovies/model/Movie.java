@@ -6,7 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Movie implements Parcelable {
+
+
 
     @SerializedName("id")
     @Expose
@@ -102,5 +106,23 @@ public class Movie implements Parcelable {
         dest.writeString(mThumbnail);
         dest.writeDouble(mUserRating);
         dest.writeString(mSynopsis);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+        Movie movie = (Movie) o;
+        return getMovieId() == movie.getMovieId() &&
+                Double.compare(movie.getmUserRating(), getmUserRating()) == 0 &&
+                getmReleaseDate().equals(movie.getmReleaseDate()) &&
+                getmTitle().equals(movie.getmTitle()) &&
+                getmThumbnail().equals(movie.getmThumbnail()) &&
+                getmSynopsis().equals(movie.getmSynopsis());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMovieId(), getmReleaseDate(), getmTitle(), getmThumbnail(), getmUserRating(), getmSynopsis());
     }
 }

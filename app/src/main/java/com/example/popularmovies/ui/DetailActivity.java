@@ -21,6 +21,8 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
         getSupportActionBar().setTitle(getString(R.string.movie__detail));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

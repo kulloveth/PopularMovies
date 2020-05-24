@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void showMovies() {
                 binding.progressBar.setVisibility(View.INVISIBLE);
-                binding.noIntrnetTv.setVisibility(View.GONE);
             }
 
             @Override
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //observe popular movies from viewmodel
+    //observe popular movies from viewModel
     private void getPopularMovie() {
         mainActivityVieModel.getPopularMovie().observe(this,
                 movies -> {
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    //observe top rated movies from viewmodel
+    //observe top rated movies from viewModel
     private void getTopRatedMovie() {
         mainActivityVieModel.getTopRatedMovie().observe(this, adapter::submitList);
     }

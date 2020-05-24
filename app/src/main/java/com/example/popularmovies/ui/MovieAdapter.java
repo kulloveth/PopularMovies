@@ -1,7 +1,6 @@
 package com.example.popularmovies.ui;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -16,21 +15,20 @@ import com.example.popularmovies.databinding.MovieItemBinding;
 import com.example.popularmovies.model.Movie;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
-    private MovieItemBinding binding;
     private ItemClickedListener mItemClickedListener;
 
     MovieAdapter() {
         super(sCallback);
     }
 
-    public void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
+    void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
         this.mItemClickedListener = mItemClickedListener;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        com.example.popularmovies.databinding.MovieItemBinding binding = MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new MovieViewHolder(binding);
     }
 
@@ -40,12 +38,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
         String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail();
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl).into(holder.posterImage);
-        holder.posterImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mItemClickedListener.onItemClicked(movie, position);
-            }
-        });
+        holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
 
 
     }
@@ -53,7 +46,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
     class MovieViewHolder extends RecyclerView.ViewHolder {
         private ImageView posterImage;
 
-        public MovieViewHolder(MovieItemBinding binding) {
+        MovieViewHolder(MovieItemBinding binding) {
             super(binding.getRoot());
             posterImage = binding.moviePoster;
         }
