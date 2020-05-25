@@ -1,6 +1,4 @@
-package com.example.popularmovies.retrofit;
-
-import com.example.popularmovies.ApiUtils;
+package com.kulloveth.popularmovies.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

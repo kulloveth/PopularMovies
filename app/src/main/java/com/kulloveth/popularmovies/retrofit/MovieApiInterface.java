@@ -1,11 +1,9 @@
-package com.example.popularmovies.retrofit;
+package com.kulloveth.popularmovies.retrofit;
 
-import com.example.popularmovies.ApiUtils;
-import com.example.popularmovies.model.MovieResponse;
-import com.example.popularmovies.model.MovieReview;
-import com.example.popularmovies.model.MovieReviewsResponse;
-import com.example.popularmovies.model.MovieVideo;
-import com.example.popularmovies.model.MovieVideosResponse;
+import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.model.MovieResponse;
+import com.kulloveth.popularmovies.model.MovieReviewsResponse;
+import com.kulloveth.popularmovies.model.MovieVideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

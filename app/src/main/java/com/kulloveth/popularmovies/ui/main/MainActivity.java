@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.main;
+package com.kulloveth.popularmovies.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.popularmovies.ProgressListener;
-import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.MovieAdapter;
-import com.example.popularmovies.databinding.ActivityMainBinding;
-import com.example.popularmovies.model.Movie;
-import com.example.popularmovies.ui.details.DetailActivity;
+import com.kulloveth.popularmovies.ProgressListener;
+import com.kulloveth.popularmovies.R;
+import com.kulloveth.popularmovies.adapters.MovieAdapter;
+
+import com.kulloveth.popularmovies.databinding.ActivityMainBinding;
+import com.kulloveth.popularmovies.model.Movie;
+import com.kulloveth.popularmovies.ui.details.DetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.popularmovies;
+package com.kulloveth.popularmovies;
 
 import org.junit.Test;
 

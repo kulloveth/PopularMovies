@@ -1,4 +1,4 @@
-package com.example.popularmovies;
+package com.kulloveth.popularmovies;
 
 public interface ProgressListener {
     void showLoading();

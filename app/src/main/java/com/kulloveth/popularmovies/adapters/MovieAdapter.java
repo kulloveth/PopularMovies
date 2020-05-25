@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapters;
+package com.kulloveth.popularmovies.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.popularmovies.ApiUtils;
-import com.example.popularmovies.databinding.MovieItemBinding;
-import com.example.popularmovies.model.Movie;
+import com.kulloveth.popularmovies.ApiUtils;
+
+import com.kulloveth.popularmovies.databinding.MovieItemBinding;
+import com.kulloveth.popularmovies.model.Movie;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
     public ItemClickedListener mItemClickedListener;
 
-   public MovieAdapter() {
+
+    public MovieAdapter() {
         super(sCallback);
     }
 
@@ -28,7 +30,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        com.example.popularmovies.databinding.MovieItemBinding binding = MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        MovieItemBinding binding = MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new MovieViewHolder(binding);
     }
 

@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapters;
+package com.kulloveth.popularmovies.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.popularmovies.ApiUtils;
-import com.example.popularmovies.databinding.TrailerItemBinding;
-import com.example.popularmovies.model.MovieVideo;
+import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.R;
+import com.kulloveth.popularmovies.databinding.TrailerItemBinding;
+import com.kulloveth.popularmovies.model.MovieVideo;
+import com.squareup.picasso.Picasso;
 
 public class VideoAdapter extends ListAdapter<MovieVideo, VideoAdapter.MovieVideoViewHolder> {
-    private ItemClickedListener mItemClickedListener;
+    public ItemClickedListener mItemClickedListener;
 
     public VideoAdapter() {
         super(sCallback);
@@ -38,10 +40,11 @@ public class VideoAdapter extends ListAdapter<MovieVideo, VideoAdapter.MovieVide
         MovieVideo video = getItem(position);
         String youtubeKey = video.getKey();
         String imageUrl = ApiUtils.YOUTUBE_BASE_IMAGE_URL + youtubeKey + ApiUtils.YOUTUBE_JPG_ENDING_URL;
-        Glide.with(holder.itemView.getContext())
-                .load(imageUrl).into(holder.posterImage);
+        Picasso.get().load(imageUrl).resize(600,400)
+                .placeholder(holder.itemView.getContext().getDrawable(R.drawable.ic_slideshow))
+                .into(holder.posterImage);
         holder.trailerName.setText(video.getName());
-        // holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
+        holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(video, position));
 
 
     }
@@ -70,7 +73,7 @@ public class VideoAdapter extends ListAdapter<MovieVideo, VideoAdapter.MovieVide
         }
     };
 
-    interface ItemClickedListener {
+    public interface ItemClickedListener {
         void onItemClicked(MovieVideo movie, int position);
     }
 }

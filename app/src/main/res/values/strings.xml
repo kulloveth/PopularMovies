@@ -9,4 +9,6 @@
     <string name="no_internet_message">No Internet Connection</string>
     <string name="movie_trailers">Movie Trailers</string>
     <string name="users_review">Users Review</string>
+    <string name="no_review_avalable">No review Avalable</string>
+    <string name="no_trailers_available">No Trailers Available</string>
 </resources>

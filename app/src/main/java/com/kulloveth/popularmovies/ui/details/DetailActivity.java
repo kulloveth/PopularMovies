@@ -1,8 +1,10 @@
-package com.example.popularmovies.ui.details;
+package com.kulloveth.popularmovies.ui.details;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -11,21 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.popularmovies.ApiUtils;
-import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.ReviewAdapter;
-import com.example.popularmovies.adapters.VideoAdapter;
-import com.example.popularmovies.databinding.ActivityDetailBinding;
-import com.example.popularmovies.model.Movie;
-import com.example.popularmovies.model.MovieReview;
-import com.example.popularmovies.model.MovieVideo;
+import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.R;
+import com.kulloveth.popularmovies.adapters.ReviewAdapter;
+import com.kulloveth.popularmovies.adapters.VideoAdapter;
+
+import com.kulloveth.popularmovies.databinding.ActivityDetailBinding;
+import com.kulloveth.popularmovies.model.Movie;
+import com.kulloveth.popularmovies.model.MovieReview;
+import com.kulloveth.popularmovies.model.MovieVideo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.popularmovies.ui.main.MainActivity.MOVIE_KEY;
+import static com.kulloveth.popularmovies.ui.main.MainActivity.MOVIE_KEY;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements VideoAdapter.ItemClickedListener {
 
     private ActivityDetailBinding binding;
     private DetailsActivityViewModel mViewModel;
@@ -71,6 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         reviewRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         reviewRv.setHasFixedSize(true);
         reviewRv.setAdapter(reviewAdapter);
+        adapter.setmItemClickedListener(this);
 
         showTrailers();
         showReviews();
@@ -106,4 +110,16 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClicked(MovieVideo movie, int position) {
+        String youtubeKey = movie.getKey();
+        Intent youtubeApp = new Intent(Intent.ACTION_VIEW, Uri.parse(ApiUtils.YOUTUBE_BASE_APP_URL + youtubeKey));
+        Intent yotubeWeb = new Intent(Intent.ACTION_VIEW, Uri.parse(ApiUtils.YOUTUBE_BASE_VIDEO_URL + youtubeKey));
+
+        try {
+            startActivity(youtubeApp);
+        } catch (ActivityNotFoundException ae) {
+            startActivity(yotubeWeb);
+        }
+    }
 }

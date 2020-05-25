@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.main;
+package com.kulloveth.popularmovies.ui.main;
 
 import android.util.Log;
 
@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.popularmovies.ApiUtils;
-import com.example.popularmovies.ProgressListener;
-import com.example.popularmovies.model.Movie;
-import com.example.popularmovies.model.MovieResponse;
-import com.example.popularmovies.retrofit.MovieApiInterface;
+import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.ProgressListener;
+import com.kulloveth.popularmovies.model.Movie;
+import com.kulloveth.popularmovies.model.MovieResponse;
+import com.kulloveth.popularmovies.retrofit.MovieApiInterface;
 
 import java.util.List;
 
