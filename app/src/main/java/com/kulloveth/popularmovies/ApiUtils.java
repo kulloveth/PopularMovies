@@ -12,7 +12,7 @@ public class ApiUtils {
     public static final String API_KEY_PARAM = "?api_key=";
 
     //api key
-    public static final String API_KEY = "";//get your api key from themoviedb.org
+    public static final String API_KEY = "ae742ce90f68a6867ddcacd1114f80c5";//get your api key from themoviedb.org
 
     //popular movies url
     public static final String POPULAR_MOVIES_URL = BASE_URL + "popular" + API_KEY_PARAM + API_KEY;

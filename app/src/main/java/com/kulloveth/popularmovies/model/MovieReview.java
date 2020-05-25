@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class MovieReview implements Parcelable {
 
     @SerializedName("author")
@@ -77,5 +79,31 @@ public class MovieReview implements Parcelable {
         dest.writeString(content);
         dest.writeString(id);
         dest.writeString(url);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MovieReview)) return false;
+        MovieReview that = (MovieReview) o;
+        return getAuthor().equals(that.getAuthor()) &&
+                getContent().equals(that.getContent()) &&
+                getId().equals(that.getId()) &&
+                getUrl().equals(that.getUrl());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAuthor(), getContent(), getId(), getUrl());
+    }
+
+    @Override
+    public String toString() {
+        return "MovieReview{" +
+                "author='" + author + '\'' +
+                ", content='" + content + '\'' +
+                ", id='" + id + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

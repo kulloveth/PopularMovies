@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.popularmovies.ApiUtils;
 import com.example.popularmovies.ProgressListener;
 import com.example.popularmovies.model.Movie;
+import com.example.popularmovies.model.MovieReview;
+import com.example.popularmovies.model.MovieReviewsResponse;
 import com.example.popularmovies.model.MovieVideo;
 import com.example.popularmovies.model.MovieVideosResponse;
 import com.example.popularmovies.retrofit.MovieApiInterface;
@@ -23,6 +25,7 @@ public class DetailsActivityViewModel extends ViewModel {
     private static final String TAG = DetailsActivityViewModel.class.getSimpleName();
 
     private MutableLiveData<List<MovieVideo>> trailerVideosLivedata;
+    private MutableLiveData<List<MovieReview>> reviewVideosLivedata;
     private MovieApiInterface movieApiInterface;
     private ProgressListener listener;
 
@@ -33,6 +36,7 @@ public class DetailsActivityViewModel extends ViewModel {
     public DetailsActivityViewModel() {
         movieApiInterface = ApiUtils.getMovieApiInterface();
         trailerVideosLivedata = new MutableLiveData<>();
+        reviewVideosLivedata = new MutableLiveData<>();
 
     }
 
@@ -55,5 +59,27 @@ public class DetailsActivityViewModel extends ViewModel {
             }
         });
         return trailerVideosLivedata;
+    }
+
+
+    LiveData<List<MovieReview>> getMovieReviiew(String url) {
+
+        movieApiInterface.getMovieReview(url).enqueue(new Callback<MovieReviewsResponse>() {
+            @Override
+            public void onResponse(Call<MovieReviewsResponse> call, Response<MovieReviewsResponse> response) {
+                if (response.isSuccessful()) {
+                    reviewVideosLivedata.setValue(response.body().getMovieReviewList());
+                    Log.d(TAG, "onResponse: review loade");
+                } else {
+                    Log.d(TAG, "onResponse: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieReviewsResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: videoResponseError" + t.getMessage());
+            }
+        });
+        return reviewVideosLivedata;
     }
 }
