@@ -5,10 +5,13 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "favorite-table")
-public class FavoriteEntity implements Parcelable {
+public class FavoriteEntity {
 
     @PrimaryKey
     @ColumnInfo(name = "movieId")
@@ -20,6 +23,7 @@ public class FavoriteEntity implements Parcelable {
     @ColumnInfo(name = "imageUrl")
     private String posterPath;
 
+    @Ignore
     public FavoriteEntity() {
     }
 
@@ -35,17 +39,6 @@ public class FavoriteEntity implements Parcelable {
         posterPath = in.readString();
     }
 
-    public static final Creator<FavoriteEntity> CREATOR = new Creator<FavoriteEntity>() {
-        @Override
-        public FavoriteEntity createFromParcel(Parcel in) {
-            return new FavoriteEntity(in);
-        }
-
-        @Override
-        public FavoriteEntity[] newArray(int size) {
-            return new FavoriteEntity[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -59,15 +52,29 @@ public class FavoriteEntity implements Parcelable {
         return posterPath;
     }
 
+
+
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return "FavoriteEntity{" +
+                "id=" + id +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                '}';
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(originalTitle);
-        dest.writeString(posterPath);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FavoriteEntity)) return false;
+        FavoriteEntity that = (FavoriteEntity) o;
+        return getId() == that.getId() &&
+                getOriginalTitle().equals(that.getOriginalTitle()) &&
+                getPosterPath().equals(that.getPosterPath());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getOriginalTitle(), getPosterPath());
     }
 }

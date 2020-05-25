@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.kulloveth.popularmovies.ApiUtils;
 import com.kulloveth.popularmovies.databinding.MovieItemBinding;
-import com.kulloveth.popularmovies.model.Movie;
+import com.kulloveth.popularmovies.db.FavoriteEntity;
 
-public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
+public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
     public ItemClickedListener mItemClickedListener;
 
 
-    public MovieAdapter() {
+    public FavoriteAdapter() {
         super(sCallback);
     }
 
@@ -28,15 +28,15 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MovieItemBinding binding = MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new MovieViewHolder(binding);
+        return new FavoriteViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Movie movie = getItem(position);
-        String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail();
+    public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
+        FavoriteEntity movie = getItem(position);
+        String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getPosterPath();
         // Picasso.get().load(imageUrl).into(holder.posterImage);
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl).into(holder.posterImage);
@@ -45,29 +45,29 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
 
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    class FavoriteViewHolder extends RecyclerView.ViewHolder {
         private ImageView posterImage;
 
-        MovieViewHolder(MovieItemBinding binding) {
+       FavoriteViewHolder(MovieItemBinding binding) {
             super(binding.getRoot());
             posterImage = binding.moviePoster;
         }
 
     }
 
-    private static DiffUtil.ItemCallback<Movie> sCallback = new DiffUtil.ItemCallback<Movie>() {
+    private static DiffUtil.ItemCallback<FavoriteEntity> sCallback = new DiffUtil.ItemCallback<FavoriteEntity>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.getMovieId() == (newItem.getMovieId());
+        public boolean areItemsTheSame(@NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
+            return oldItem.getId() == (newItem.getId());
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+        public boolean areContentsTheSame(@NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
             return oldItem.equals(newItem);
         }
     };
 
     public interface ItemClickedListener {
-        void onItemClicked(Movie movie, int position);
+        void onItemClicked(FavoriteEntity movie, int position);
     }
 }

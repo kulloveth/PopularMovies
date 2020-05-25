@@ -1,13 +1,17 @@
 package com.kulloveth.popularmovies.ui.main;
 
+import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kulloveth.popularmovies.ApiUtils;
 import com.kulloveth.popularmovies.ProgressListener;
+import com.kulloveth.popularmovies.db.FavoriteDatabase;
+import com.kulloveth.popularmovies.db.FavoriteEntity;
 import com.kulloveth.popularmovies.model.Movie;
 import com.kulloveth.popularmovies.model.MovieResponse;
 import com.kulloveth.popularmovies.retrofit.MovieApiInterface;
@@ -18,22 +22,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivityVieModel extends ViewModel {
+public class MainActivityVieModel extends AndroidViewModel {
     private static final String TAG = MainActivityVieModel.class.getSimpleName();
 
     private MutableLiveData<List<Movie>> popularMovieLiveData;
     private MutableLiveData<List<Movie>> topRatedMovieLiveData;
     private MovieApiInterface movieApiInterface;
     private ProgressListener listener;
+    private FavoriteDatabase favoriteDatabase;
 
     void setListener(ProgressListener listener) {
         this.listener = listener;
     }
 
-    public MainActivityVieModel() {
+    public MainActivityVieModel(Application application) {
+        super(application);
         movieApiInterface = ApiUtils.getMovieApiInterface();
         popularMovieLiveData = new MutableLiveData<>();
         topRatedMovieLiveData = new MutableLiveData<>();
+        favoriteDatabase = FavoriteDatabase.getDatabase(application);
     }
 
     //fetch popular movies from api
@@ -89,5 +96,9 @@ public class MainActivityVieModel extends ViewModel {
         return topRatedMovieLiveData;
     }
 
+    public LiveData<List<FavoriteEntity>> getFav() {
+        return favoriteDatabase.favoriteDao().fetch();
+
+    }
 
 }

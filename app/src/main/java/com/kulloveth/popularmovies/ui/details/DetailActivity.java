@@ -13,15 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.kulloveth.popularmovies.ApiUtils;
 import com.kulloveth.popularmovies.R;
 import com.kulloveth.popularmovies.adapters.ReviewAdapter;
 import com.kulloveth.popularmovies.adapters.VideoAdapter;
 
 import com.kulloveth.popularmovies.databinding.ActivityDetailBinding;
+import com.kulloveth.popularmovies.db.FavoriteEntity;
 import com.kulloveth.popularmovies.model.Movie;
 import com.kulloveth.popularmovies.model.MovieReview;
 import com.kulloveth.popularmovies.model.MovieVideo;
+import com.kulloveth.popularmovies.ui.favorite.FavoriteViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +64,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
             binding.ratingDetail.setText(String.valueOf(movie.getmUserRating()));
             binding.releasedDetail.setText(movie.getmReleaseDate());
             binding.synopsisTv.setText(movie.getmSynopsis());
-            Glide.with(this).load(ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail()).into(binding.moviePoster);
+            Picasso.get().load(ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail()).into(binding.moviePoster);
         }
 
         adapter = new VideoAdapter();
@@ -79,6 +83,9 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
         showTrailers();
         showReviews();
 
+        binding.favFab.setOnClickListener(v -> {
+            insertFav();
+        });
 
     }
 
@@ -121,5 +128,10 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
         } catch (ActivityNotFoundException ae) {
             startActivity(yotubeWeb);
         }
+    }
+
+    void insertFav() {
+        mViewModel.insertFavorite(new FavoriteEntity(movie.getMovieId(), movie.getmTitle(), movie.getmThumbnail()));
+        Snackbar.make(getWindow().getDecorView(), "Favorite Added", Snackbar.LENGTH_SHORT).show();
     }
 }

@@ -54,6 +54,10 @@ public class Movie implements Parcelable {
         mSynopsis = in.readString();
     }
 
+    public Movie(int id,String title, String mThumbnail) {
+        this.mThumbnail = mThumbnail;
+    }
+
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel in) {
