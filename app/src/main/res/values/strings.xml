@@ -12,4 +12,5 @@
     <string name="no_review_avalable">No review Avalable</string>
     <string name="no_trailers_available">No Trailers Available</string>
     <string name="favorite_movies">Favorite Movies</string>
+    <string name="favorite_detail">Favorite Movie Details</string>
 </resources>

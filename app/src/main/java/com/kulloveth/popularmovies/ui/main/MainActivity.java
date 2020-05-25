@@ -13,23 +13,20 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.kulloveth.popularmovies.ProgressListener;
 import com.kulloveth.popularmovies.R;
 import com.kulloveth.popularmovies.adapters.FavoriteAdapter;
 import com.kulloveth.popularmovies.adapters.MovieAdapter;
-
 import com.kulloveth.popularmovies.databinding.ActivityMainBinding;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
 import com.kulloveth.popularmovies.model.Movie;
 import com.kulloveth.popularmovies.ui.details.DetailActivity;
-import com.google.android.material.snackbar.Snackbar;
 import com.kulloveth.popularmovies.ui.favorite.FavoriteActivity;
-import com.kulloveth.popularmovies.ui.favorite.FavoriteViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

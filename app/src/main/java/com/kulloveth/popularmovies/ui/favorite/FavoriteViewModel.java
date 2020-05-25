@@ -31,6 +31,14 @@ public class FavoriteViewModel extends AndroidViewModel {
 
     }
 
+    void delete(FavoriteEntity favoriteEntity) {
+        Completable completable = favoriteDatabase.favoriteDao().delete(favoriteEntity).subscribeOn(Schedulers.io());
+        compositeDisposable.add(completable.subscribe());
+    }
 
-
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.dispose();
+    }
 }

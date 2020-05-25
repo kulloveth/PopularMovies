@@ -104,4 +104,14 @@
                 app:layout_constraintTop_toBottomOf="@id/liner" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fav_fab"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/dimens_16dp"
+        android:layout_marginBottom="@dimen/dimens_16dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:backgroundTint="@color/colorPrimary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -197,5 +197,5 @@
         android:layout_marginEnd="@dimen/dimens_16dp"
         android:layout_marginBottom="@dimen/dimens_16dp"
         android:src="@drawable/ic_star_border_black_24dp"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@android:color/holo_red_dark" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

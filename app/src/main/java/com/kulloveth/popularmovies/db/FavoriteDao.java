@@ -21,5 +21,5 @@ public interface FavoriteDao {
     public LiveData<List<FavoriteEntity>> fetch();
 
     @Delete
-    public void delete(FavoriteEntity favoriteEntity);
+    public Completable delete(FavoriteEntity favoriteEntity);
 }
