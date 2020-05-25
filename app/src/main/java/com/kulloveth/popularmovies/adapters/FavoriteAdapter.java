@@ -15,14 +15,14 @@ import com.kulloveth.popularmovies.databinding.MovieItemBinding;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
 
 public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
-    public ItemClickedListener mItemClickedListener;
+    public FavoriteItemClickedListener mItemClickedListener;
 
 
     public FavoriteAdapter() {
         super(sCallback);
     }
 
-    public void setmItemClickedListener(ItemClickedListener mItemClickedListener) {
+    public void setmItemClickedListener(FavoriteItemClickedListener mItemClickedListener) {
         this.mItemClickedListener = mItemClickedListener;
     }
 
@@ -40,7 +40,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
         // Picasso.get().load(imageUrl).into(holder.posterImage);
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl).into(holder.posterImage);
-        holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
+        holder.posterImage.setOnClickListener(v -> mItemClickedListener.onFavoriteItemClicked(movie, position));
 
 
     }
@@ -67,7 +67,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
         }
     };
 
-    public interface ItemClickedListener {
-        void onItemClicked(FavoriteEntity movie, int position);
+    public interface FavoriteItemClickedListener {
+        void onFavoriteItemClicked(FavoriteEntity movie, int position);
     }
 }

@@ -96,7 +96,8 @@ public class MainActivityVieModel extends AndroidViewModel {
         return topRatedMovieLiveData;
     }
 
-    public LiveData<List<FavoriteEntity>> getFav() {
+    //fetch favorites from Room
+    LiveData<List<FavoriteEntity>> getFav() {
         return favoriteDatabase.favoriteDao().fetch();
 
     }

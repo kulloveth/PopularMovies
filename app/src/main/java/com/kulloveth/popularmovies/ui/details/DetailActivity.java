@@ -131,7 +131,9 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
     }
 
     void insertFav() {
-        mViewModel.insertFavorite(new FavoriteEntity(movie.getMovieId(), movie.getmTitle(), movie.getmThumbnail()));
+        mViewModel.insertFavorite(new FavoriteEntity(movie.getMovieId(), movie.getmTitle(), movie.getmThumbnail(), movie.getmReleaseDate(), movie.getmUserRating(), movie.getmSynopsis()));
         Snackbar.make(getWindow().getDecorView(), "Favorite Added", Snackbar.LENGTH_SHORT).show();
     }
+
+
 }

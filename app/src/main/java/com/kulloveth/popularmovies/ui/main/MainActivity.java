@@ -28,16 +28,17 @@ import com.kulloveth.popularmovies.db.FavoriteEntity;
 import com.kulloveth.popularmovies.model.Movie;
 import com.kulloveth.popularmovies.ui.details.DetailActivity;
 import com.google.android.material.snackbar.Snackbar;
+import com.kulloveth.popularmovies.ui.favorite.FavoriteActivity;
 import com.kulloveth.popularmovies.ui.favorite.FavoriteViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FavoriteAdapter.FavoriteItemClickedListener {
 
 
     public static final String MOVIE_KEY = "movie";
-
+    public static final String FAV_KEY = "favorite";
     private ActivityMainBinding binding;
     private MainActivityVieModel mainActivityVieModel;
     private MovieAdapter adapter;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(MOVIE_KEY, movie);
             startActivity(intent);
         });
+
+        favoriteAdapter.setmItemClickedListener(this);
 
 
         //implement interface to listen to changes
@@ -128,7 +131,11 @@ public class MainActivity extends AppCompatActivity {
     void favMovies() {
         mainActivityVieModel.getFav().observe(this, favoriteEntities -> {
             Log.d("Favorites", "onChanged: " + favoriteEntities);
-            favoriteAdapter.submitList(favoriteEntities);
+            if (favoriteEntities.size() == 0){
+                Snackbar.make(getWindow().getDecorView(),"You have no Favorite",Snackbar.LENGTH_SHORT).show();
+            }else {
+                favoriteAdapter.submitList(favoriteEntities);
+            }
         });
         binding.progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setAdapter(favoriteAdapter);
@@ -177,5 +184,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onFavoriteItemClicked(FavoriteEntity movie, int position) {
+        Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
+        intent.putExtra(FAV_KEY, movie);
+        startActivity(intent);
+    }
 }

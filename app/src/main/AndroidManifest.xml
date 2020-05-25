@@ -12,16 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.favorite.FavoriteActivity"></activity>
         <activity
-            android:name="com.kulloveth.popularmovies.ui.details.DetailActivity"
-            android:parentActivityName="com.kulloveth.popularmovies.ui.main.MainActivity">
+            android:name=".ui.details.DetailActivity"
+            android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kulloveth.popularmovies.ui.main.MainActivity" />
         </activity>
-        <activity android:name="com.kulloveth.popularmovies.ui.main.MainActivity"
-            android:launchMode="singleTop"
-            android:configChanges="keyboardHidden|screenSize|orientation">
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
