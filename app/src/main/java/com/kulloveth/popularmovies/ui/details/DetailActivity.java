@@ -1,10 +1,14 @@
 package com.kulloveth.popularmovies.ui.details;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -12,19 +16,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.ProgressListener;
 import com.kulloveth.popularmovies.R;
 import com.kulloveth.popularmovies.adapters.ReviewAdapter;
 import com.kulloveth.popularmovies.adapters.VideoAdapter;
-
 import com.kulloveth.popularmovies.databinding.ActivityDetailBinding;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
 import com.kulloveth.popularmovies.model.Movie;
 import com.kulloveth.popularmovies.model.MovieReview;
 import com.kulloveth.popularmovies.model.MovieVideo;
-import com.kulloveth.popularmovies.ui.favorite.FavoriteViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import java.util.List;
 
 import static com.kulloveth.popularmovies.ui.main.MainActivity.MOVIE_KEY;
 
-public class DetailActivity extends AppCompatActivity implements VideoAdapter.ItemClickedListener {
+public class DetailActivity extends AppCompatActivity implements VideoAdapter.ItemClickedListener, ProgressListener {
 
     private ActivityDetailBinding binding;
     private DetailsActivityViewModel mViewModel;
@@ -53,9 +55,11 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
 
         getSupportActionBar().setTitle(getString(R.string.movie__detail));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         movieVideoList = new ArrayList<>();
         movieReviewList = new ArrayList<>();
         mViewModel = new ViewModelProvider(this).get(DetailsActivityViewModel.class);
+        mViewModel.setListener(this);
         //get data from intent if it exist
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -75,7 +79,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
 
         reviewAdapter = new ReviewAdapter();
         reviewRv = binding.reviewRv;
-        reviewRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        reviewRv.setLayoutManager(new LinearLayoutManager(this));
         reviewRv.setHasFixedSize(true);
         reviewRv.setAdapter(reviewAdapter);
         adapter.setmItemClickedListener(this);
@@ -97,8 +101,12 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
             @Override
             public void onChanged(List<MovieReview> movieReviews) {
                 Log.d("review", "onChanged: " + movieReviews);
-                movieReviewList = movieReviews;
-                reviewAdapter.submitList(movieReviewList);
+                if (movieReviews.isEmpty()) {
+                    reviewRv.setVisibility(View.GONE);
+                    binding.noReviewTv.setVisibility(View.VISIBLE);
+                } else {
+                    reviewAdapter.submitList(movieReviews);
+                }
             }
         });
     }
@@ -110,8 +118,14 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
         mViewModel.getMovieTrailer(videosUrl).observe(this, new Observer<List<MovieVideo>>() {
             @Override
             public void onChanged(List<MovieVideo> movieVideos) {
-                movieVideoList = movieVideos;
-                adapter.submitList(movieVideoList);
+                if (movieVideos.isEmpty()) {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    binding.noVideoTv.setVisibility(View.VISIBLE);
+                } else {
+                    adapter.submitList(movieVideos);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -136,4 +150,28 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.It
     }
 
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showMovies() {
+
+    }
+
+    @Override
+    public void showNoInternet() {
+        Snackbar.make(getWindow().getDecorView(), getString(R.string.no_internet_message), Snackbar.LENGTH_SHORT).show();
+    }
+
+    //check if user has internet connection
+    private boolean isConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = null;
+        if (connectivityManager != null) {
+            networkInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+    }
 }

@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.kulloveth.popularmovies.ApiUtils;
 import com.kulloveth.popularmovies.databinding.MovieItemBinding;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
+import com.squareup.picasso.Picasso;
 
 public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
-    public FavoriteItemClickedListener mItemClickedListener;
+    private FavoriteItemClickedListener mItemClickedListener;
 
 
     public FavoriteAdapter() {
@@ -37,8 +37,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
         FavoriteEntity movie = getItem(position);
         String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getPosterPath();
-        // Picasso.get().load(imageUrl).into(holder.posterImage);
-        Glide.with(holder.itemView.getContext())
+        Picasso.get()
                 .load(imageUrl).into(holder.posterImage);
         holder.posterImage.setOnClickListener(v -> mItemClickedListener.onFavoriteItemClicked(movie, position));
 

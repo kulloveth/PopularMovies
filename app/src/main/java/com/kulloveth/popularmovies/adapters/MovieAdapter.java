@@ -4,15 +4,17 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.kulloveth.popularmovies.ApiUtils;
+import com.kulloveth.popularmovies.R;
 import com.kulloveth.popularmovies.databinding.MovieItemBinding;
 import com.kulloveth.popularmovies.model.Movie;
+import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolder> {
     public ItemClickedListener mItemClickedListener;
@@ -37,9 +39,11 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieViewHolde
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = getItem(position);
         String imageUrl = ApiUtils.BASE_IMAGE_PATH + movie.getmThumbnail();
-        // Picasso.get().load(imageUrl).into(holder.posterImage);
-        Glide.with(holder.itemView.getContext())
-                .load(imageUrl).into(holder.posterImage);
+        Picasso.get().load(imageUrl)
+                .error(holder.itemView.getContext().getDrawable(R.drawable.ic_slideshow))
+                .placeholder(holder.itemView.getContext().getDrawable(R.drawable.ic_slideshow))
+                .into(holder.posterImage);
+
         holder.posterImage.setOnClickListener(v -> mItemClickedListener.onItemClicked(movie, position));
 
 

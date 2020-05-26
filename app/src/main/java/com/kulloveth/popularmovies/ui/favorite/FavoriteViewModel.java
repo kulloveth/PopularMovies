@@ -4,24 +4,18 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.kulloveth.popularmovies.db.FavoriteDatabase;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
 
-import java.util.List;
-
 import io.reactivex.Completable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class FavoriteViewModel extends AndroidViewModel {
 
     private FavoriteDatabase favoriteDatabase;
     private CompositeDisposable compositeDisposable;
-    private MutableLiveData<List<FavoriteEntity>> favoriteLivedata;
 
 
     public FavoriteViewModel(@NonNull Application application) {
@@ -31,6 +25,7 @@ public class FavoriteViewModel extends AndroidViewModel {
 
     }
 
+    //delete favorite
     void delete(FavoriteEntity favoriteEntity) {
         Completable completable = favoriteDatabase.favoriteDao().delete(favoriteEntity).subscribeOn(Schedulers.io());
         compositeDisposable.add(completable.subscribe());

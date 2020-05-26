@@ -42,8 +42,6 @@ public class DetailsActivityViewModel extends AndroidViewModel {
     }
 
 
-
-
     public DetailsActivityViewModel(@NonNull Application application) {
         super(application);
         movieApiInterface = ApiUtils.getMovieApiInterface();
@@ -54,12 +52,15 @@ public class DetailsActivityViewModel extends AndroidViewModel {
 
     }
 
+    //fetch movie Trailer
     LiveData<List<MovieVideo>> getMovieTrailer(String url) {
-
+        listener.showLoading();
         movieApiInterface.getMovieVideo(url).enqueue(new Callback<MovieVideosResponse>() {
+
             @Override
             public void onResponse(Call<MovieVideosResponse> call, Response<MovieVideosResponse> response) {
                 if (response.isSuccessful()) {
+                    listener.showMovies();
                     trailerVideosLivedata.setValue(response.body().getMovieVideoList());
                     Log.d(TAG, "onResponse: videos loade");
                 } else {
@@ -69,6 +70,7 @@ public class DetailsActivityViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<MovieVideosResponse> call, Throwable t) {
+                listener.showNoInternet();
                 Log.e(TAG, "onFailure: videoResponseError" + t.getMessage());
             }
         });
@@ -76,12 +78,15 @@ public class DetailsActivityViewModel extends AndroidViewModel {
     }
 
 
+    //fetch Movie Review
     LiveData<List<MovieReview>> getMovieReviiew(String url) {
+        listener.showLoading();
 
         movieApiInterface.getMovieReview(url).enqueue(new Callback<MovieReviewsResponse>() {
             @Override
             public void onResponse(Call<MovieReviewsResponse> call, Response<MovieReviewsResponse> response) {
                 if (response.isSuccessful()) {
+                    listener.showMovies();
                     reviewVideosLivedata.setValue(response.body().getMovieReviewList());
                     Log.d(TAG, "onResponse: review loade");
                 } else {
@@ -91,6 +96,7 @@ public class DetailsActivityViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<MovieReviewsResponse> call, Throwable t) {
+                listener.showNoInternet();
                 Log.e(TAG, "onFailure: videoResponseError" + t.getMessage());
             }
         });
@@ -98,11 +104,18 @@ public class DetailsActivityViewModel extends AndroidViewModel {
     }
 
 
-     void insertFavorite(FavoriteEntity favoriteEntity) {
+    //insert favorite to room
+    void insertFavorite(FavoriteEntity favoriteEntity) {
         Completable completable = favoriteDatabase.favoriteDao().
                 insert(favoriteEntity).subscribeOn(Schedulers.io());
 
         compositeDisposable.add(completable.subscribe());
 
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.dispose();
     }
 }

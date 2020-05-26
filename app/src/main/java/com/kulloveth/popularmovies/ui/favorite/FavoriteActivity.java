@@ -1,17 +1,15 @@
 package com.kulloveth.popularmovies.ui.favorite;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.kulloveth.popularmovies.ApiUtils;
 import com.kulloveth.popularmovies.R;
 import com.kulloveth.popularmovies.databinding.ActivityFavoriteBinding;
 import com.kulloveth.popularmovies.db.FavoriteEntity;
-import com.kulloveth.popularmovies.ui.main.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import static com.kulloveth.popularmovies.ui.main.MainActivity.FAV_KEY;
@@ -50,7 +48,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     void deleteFavorite() {
         favoriteViewModel.delete(new FavoriteEntity(movie.getId(), movie.getOriginalTitle(), movie.getPosterPath(), movie.getSynopsis(), movie.getUserRating(), movie.getReleaseDate()));
-        Snackbar.make(getWindow().getDecorView(), "Favorite removed", Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(this, movie.getOriginalTitle()+" removed", Toast.LENGTH_SHORT).show();
         finish();
     }
 
