@@ -20,3 +20,23 @@ This Project is part of  the Udacity Android Developer Nanodegree  to allow user
   
   </tr>
 </table>
+
+## Features
+* Discover the popular and top Rated Movies
+* Shows Reviews from each movie
+* Shows Movie Trailers
+* User can view and play trailers on youtube
+* User can mark a movie as favorite in the detail view
+* Offline support for Favorite Movies
+* MVVM Android Architecture(Room, Livedata,ViewModel)
+
+## Libraries Used
+* AndroidX
+* Picasso
+* Retrofit
+* Gson
+* Room
+* LiveData
+* ViewModel
+* ViewBinding
+* RxJava
