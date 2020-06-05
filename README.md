@@ -4,23 +4,19 @@ This Project is part of  the Udacity Android Developer Nanodegree  to allow user
 <tr>
 <td>
 
- ![Popular Movies](https://github.com/kulloveth/BlackJackCardGame/blob/master/screenshots/popular.PNG)
+ ![Popular Movies](https://github.com/kulloveth/PopularMovies/blob/master/screenshots/popular.png)
 
  </td>
  <td>
 
- ![Movie Detail](https://github.com/kulloveth/BlackJackCardGame/blob/master/screenshots/detail.PNG)
+ ![Movie Detail](https://github.com/kulloveth/PopularMovies/blob/master/screenshots/detail.png)
 
  </td>
    <td>
 
-  ![Movie Trailers](https://github.com/kulloveth/BlackJackCardGame/blob/master/screenshots/trailers.PNG)
+  ![Movie Trailers](https://github.com/kulloveth/PopularMovies/blob/master/screenshots/trailers.png)
 
   </td>
-    <td>
-
-    ![Favorites](https://github.com/kulloveth/BlackJackCardGame/blob/master/screenshots/favorites.PNG)
-
-    </td>
+  
   </tr>
 </table>
